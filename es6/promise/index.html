@@ -148,7 +148,7 @@
     <div class="head-info">
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-06-11</span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5985</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5776</span>
     </div>
   </div>
 </section>
@@ -158,15 +158,13 @@
       <h4 id="为什么要异步编程"><a href="#为什么要异步编程" class="headerlink" title="为什么要异步编程"></a>为什么要异步编程</h4><p>我们在写前端代码时，经常会对dom做事件处理操作，比如点击、激活焦点、失去焦点等；再比如我们用ajax请求数据，使用回调函数获取返回值。这些都属于异步编程。</p>
 <p>也许你已经大概知道JavaScript引擎单线程的概念，那么这种单线程模式和异步编程有什么关系呢？</p>
 <p><strong>JavaScript引擎中，只有一个主线程，当执行JavaScript代码块时，不允许其他代码块执行，而事件机制和回调机制的代码块会被添加到任务队列中，当符合某个触发回调或者事件的时候，就会执行该事件或者回调函数。</strong></p>
-<p>上面这段话的意思可以这样理解，假设你是一个修仙者，你去闯一个秘境，这个秘境就是主线程，你只能一直深入下去，直到找到宝物和出口，而你还有一个自身的储物空间，这个空间就类似存放任务队列的东西，你在储物空间放了很多你可能用到的法宝或者丹药，这些东西就是回调函数和事件函数，当你遇到危险或者满足某个条件时，就可以从储物空间拿出你当前需要的东西。</p>
-<p>好吧，不扯这么远，下面看正题。</p>
 <p><strong>事件模型：</strong><br>浏览器初次渲染DOM的时候，我们会给一些DOM绑定事件函数，只有当触发了这些DOM事件函数，才会执行他们。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> btn = <span class="built_in">document</span>.querySelector(<span class="string">'.button'</span>)</span><br><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(event)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>回调模式：</strong><br>nodejs中可能非常常见这种回调模式，但是对于前端来说，ajax的回调是最熟悉不过了。ajax回调有多个状态，当响应成功和失败都有不同的回调函数。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.post(<span class="string">'/router'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>回调也可能带来一个问题，那就是地狱回调，不过幸运的是，我从进入前端界开始，就使用react，跳过了很多坑，特别是地狱回调，一直没有机会在工作中遇见到，真是遗憾。</p>
+<p>回调也可能带来一个问题，那就是地狱回调，不过幸运的是，我从进入前端界开始，一直没有机会在工作中遇见到，真是遗憾。</p>
 <h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p>事件函数没有问题，我们用的很爽，问题出在回调函数，尤其是指地狱回调，Promise的出现正是为了避免地狱回调带来的困扰。</p>
 <p>推荐你看[JavaScript MDN Promise教程][1]，然后再结合本文看，你就能学会使用Promise了。</p>
 <h4 id="Promise是什么"><a href="#Promise是什么" class="headerlink" title="Promise是什么"></a>Promise是什么</h4><p>Promise的中文意思是承诺，也就是说，JavaScript对你许下一个承诺，会在未来某个时刻兑现承诺。</p>

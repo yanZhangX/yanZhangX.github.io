@@ -149,7 +149,7 @@ Map和Set都叫做集合，但是他们也有所不同。Set...">
     <div class="head-info">
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-06-11</span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4857</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4364</span>
     </div>
   </div>
 </section>
@@ -219,17 +219,9 @@ Map和Set都叫做集合，但是他们也有所不同。Set...">
 <p><strong>Map同样可以使用forEach遍历key、value</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="keyword">const</span> key = &#123;&#125;;</span><br><span class="line">map.set(key, <span class="string">'这是个什么玩意'</span>);</span><br><span class="line">map.set(<span class="string">'name'</span>, <span class="string">'haha'</span>);</span><br><span class="line">map.set(<span class="string">'id'</span>, <span class="number">1</span>);</span><br><span class="line">map.forEach(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key, value)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//Object &#123;&#125; "这是个什么玩意"</span></span><br><span class="line"><span class="comment">//"name" "haha"</span></span><br><span class="line"><span class="comment">//"id" 1</span></span><br></pre></td></tr></table></figure>
 
-<p>其他Map的使用方法可以前往 [Map之家][3] 学习。</p>
-<h3 id="Weak-Map"><a href="#Weak-Map" class="headerlink" title="Weak Map"></a>Weak Map</h3><p>有强Map，就有弱鸡Map。</p>
-<p>和Set要解决的问题一样，希望不再引用Map的时候自动触发垃圾回收机制。那么，你就需要Weak Map。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</span><br><span class="line"><span class="keyword">const</span> key = <span class="built_in">document</span>.querySelector(<span class="string">'.header'</span>);</span><br><span class="line">map.set(key, <span class="string">'这是个什么玩意'</span>);</span><br><span class="line"></span><br><span class="line">map.get(key) <span class="comment">// "这是个什么玩意"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//移除该元素</span></span><br><span class="line">key.parentNode.removeChild(key);</span><br><span class="line">key = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-
-
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Set集合可以用来过滤数组中重复的元素，只能通过has方法检测指定的值是否存在，或者是通过forEach处理每个值。</p>
 <p>Weak Set集合存放对象的弱引用，当该对象的其他强引用被清除时，集合中的弱引用也会自动被垃圾回收机制回收，追踪成组的对象是该集合最好的使用方式。</p>
 <p>Map集合通过set()添加键值对，通过get()获取键值，各种方法的使用查看文章教程，你可以把它看成是比Object更加强大的对象。</p>
-<p>Weak Map集合只支持对象类型的key，所有key都是弱引用，当该对象的其他强引用被清除时，集合中的弱引用也会自动被垃圾回收机制回收，为那些实际使用与生命周期管理分离的对象添加额外信息是非常适合的使用方式。</p>
-<p>记得刚开始学习JavaScript的时候，不知道各种数据类型有什么用，如果你现在刚学习Map和Set也是这种不知道能用来干什么的想法，那么，恭喜，他们已经开始走入你的编程生涯，慢慢的你就会熟悉他们。</p>
 
     </section>
     <section class="extra">

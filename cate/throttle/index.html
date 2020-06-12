@@ -149,7 +149,7 @@
     <div class="head-info">
       <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-05-29</span>
       
-      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6183</span>
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6179</span>
     </div>
   </div>
 </section>
@@ -158,7 +158,7 @@
     <section class="content">
       <h2 id="定义及解读"><a href="#定义及解读" class="headerlink" title="定义及解读"></a><a href="#1">定义及解读</a></h2><blockquote><font face="微软雅黑" id="1">
 函数节流指的是某个函数在一定时间间隔内（例如 3 秒）只执行一次，在这 3 秒内 无视后来产生的函数调用请求，也不会延长时间间隔。3 秒间隔结束后第一次遇到新的函数调用会触发执行，然后在这新的 3 秒内依旧无视后来产生的函数调用请求，以此类推。
-</font><footer><strong>节流定义</strong></footer></blockquote>
+</font></blockquote>
 <p><img   class="lazyload" data-original="http://resource.muyiy.cn/image/2019-07-24-060202.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="补充文字-显示在图片不存在时"></p>
 <p>举一个小例子，不知道大家小时候有没有养过小金鱼啥的，养金鱼肯定少不了接水，刚开始接水时管道中水流很大，水到半满时开始拧紧水龙头，减少水流的速度变成 3 秒一滴，通过滴水给小金鱼增加氧气。</p>
 <p>此时「管道中的水」就是我们频繁操作事件而不断涌入的回调任务，它需要接受「水龙头」安排；「水龙头」就是节流阀，控制水的流速，过滤无效的回调任务；「滴水」就是每隔一段时间执行一次函数，「3 秒」就是间隔时间，它是「水龙头」决定「滴水」的依据。</p>
