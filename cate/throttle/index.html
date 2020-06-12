@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>节流函数 throttle - 痴痴醉</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="keywords" content="xiangty, 痴痴醉,"> 
+  
+  <meta name="description" content="定义及解读
+函数节流指的是某个函数在一定时间间隔内（例..."> 
+  
+  <meta name="author" content="Tyler X"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate_alipay: '',
+      donate_wechat: '',
+      motto: {
+        api: '',
+        default: '痴痴醉'
+      },
+      galleries: {
+        enable: 'true'
+      },
+      fab: {
+        enable: 'true',
+        alwaysShow: 'false'
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</nav>
+
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">节流函数 throttle</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-05-29</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6183</span>
+    </div>
+  </div>
+</section>
+
+  <section class="main">
+    <section class="content">
+      <h2 id="定义及解读"><a href="#定义及解读" class="headerlink" title="定义及解读"></a><a href="#1">定义及解读</a></h2><blockquote><font face="微软雅黑" id="1">
+函数节流指的是某个函数在一定时间间隔内（例如 3 秒）只执行一次，在这 3 秒内 无视后来产生的函数调用请求，也不会延长时间间隔。3 秒间隔结束后第一次遇到新的函数调用会触发执行，然后在这新的 3 秒内依旧无视后来产生的函数调用请求，以此类推。
+</font><footer><strong>节流定义</strong></footer></blockquote>
+<p><img   class="lazyload" data-original="http://resource.muyiy.cn/image/2019-07-24-060202.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="补充文字-显示在图片不存在时"></p>
+<p>举一个小例子，不知道大家小时候有没有养过小金鱼啥的，养金鱼肯定少不了接水，刚开始接水时管道中水流很大，水到半满时开始拧紧水龙头，减少水流的速度变成 3 秒一滴，通过滴水给小金鱼增加氧气。</p>
+<p>此时「管道中的水」就是我们频繁操作事件而不断涌入的回调任务，它需要接受「水龙头」安排；「水龙头」就是节流阀，控制水的流速，过滤无效的回调任务；「滴水」就是每隔一段时间执行一次函数，「3 秒」就是间隔时间，它是「水龙头」决定「滴水」的依据。</p>
+<p>如果你还无法理解，看下面这张图就清晰多了，另外点击 <a href="http://demo.nimius.net/debounce_throttle/" target="_blank" rel="noopener"><font color=#0099ff>这个页面</font></a> 查看节流和防抖的可视化比较。其中 Regular 是不做任何处理的情况，throttle 是函数节流之后的结果，debounce 是函数防抖之后的结果（下一小节介绍）。<br><img   class="lazyload" data-original="http://resource.muyiy.cn/image/2019-07-24-060203.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="节流示例图"></p>
+<h2 id="原理及实现"><a href="#原理及实现" class="headerlink" title="原理及实现"></a><a href="#2">原理及实现</a></h2><blockquote><font face="微软雅黑" id="2">
+函数节流非常适用于函数被频繁调用的场景，例如：window.onresize() 事件、mousemove 事件、上传进度等情况。使用 throttle API 很简单，那应该如何实现 throttle 这个函数呢？
+</font></blockquote>
+
+<p>实现方案有以下两种</p>
+<ul>
+<li><p>第一种是用时间戳来判断是否已到执行时间，记录上次执行的时间戳，然后每次触发事件执行回调，回调中判断当前时间戳距离上次执行时间戳的间隔是否已经达到时间差（Xms） ，如果是则执行，并更新上次执行的时间戳，如此循环。</p>
+</li>
+<li><p>第二种方法是使用定时器，比如当 scroll 事件刚触发时，打印一个 hello world，然后设置个 1000ms 的定时器，此后每次触发 scroll 事件触发回调，如果已经存在定时器，则回调不执行方法，直到定时器触发，handler 被清除，然后重新设置定时器。</p>
+</li>
+</ul>
+<blockquote><font face="微软雅黑" id="2">
+这里我们采用第一种方案来实现，通过闭包保存一个 previous 变量，每次触发 throttle 函数时判断当前时间和 previous 的时间差，如果这段时间差小于等待时间，那就忽略本次事件触发。如果大于等待时间就把 previous 设置为当前时间并执行函数 fn。
+</font></blockquote>
+
+<p>我们来一步步实现，首先实现用闭包保存 previous 变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const throttle &#x3D; (fn, wait) &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F; 上一次执行该函数的时间</span><br><span class="line">  let previous &#x3D; 0</span><br><span class="line">  return function(...args) &#123;</span><br><span class="line">    console.log(previous)</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行 throttle 函数后会返回一个新的 function，我们命名为 betterFn。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const betterFn &#x3D; function(...args) &#123;</span><br><span class="line">  console.log(previous)</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>betterFn 函数中可以获取到 previous 变量值也可以修改，在回调监听或事件触发时就会执行 betterFn，即 betterFn()，所以在这个新函数内判断当前时间和 previous 的时间差即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const betterFn &#x3D; function(...args) &#123;</span><br><span class="line">  let now &#x3D; +new Date();</span><br><span class="line">  if (now - previous &gt; wait) &#123;</span><br><span class="line">    previous &#x3D; now</span><br><span class="line">    &#x2F;&#x2F; 执行 fn 函数</span><br><span class="line">    fn.apply(this, args)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结合上面两段代码就实现了节流函数，所以完整的实现如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; fn 是需要执行的函数</span><br><span class="line">&#x2F;&#x2F; wait 是时间间隔</span><br><span class="line">const throttle &#x3D; (fn, wait &#x3D; 50) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; 上一次执行 fn 的时间</span><br><span class="line">  let previous &#x3D; 0</span><br><span class="line">  &#x2F;&#x2F; 将 throttle 处理结果当作函数返回</span><br><span class="line">  return function(...args) &#123;</span><br><span class="line">    &#x2F;&#x2F; 获取当前时间，转换成时间戳，单位毫秒</span><br><span class="line">    let now &#x3D; +new Date()</span><br><span class="line">    &#x2F;&#x2F; 将当前时间和上一次执行函数的时间进行对比</span><br><span class="line">    &#x2F;&#x2F; 大于等待时间就把 previous 设置为当前时间并执行函数 fn</span><br><span class="line">    if (now - previous &gt; wait) &#123;</span><br><span class="line">      previous &#x3D; now</span><br><span class="line">      fn.apply(this, args)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; DEMO</span><br><span class="line">&#x2F;&#x2F; 执行 throttle 函数返回新函数</span><br><span class="line">const betterFn &#x3D; throttle(() &#x3D;&gt; console.log(&#39;fn 函数执行了&#39;), 1000)</span><br><span class="line">&#x2F;&#x2F; 每 10 毫秒执行一次 betterFn 函数，但是只有时间差大于 1000 时才会执行 fn</span><br><span class="line">setInterval(betterFn, 10)</span><br></pre></td></tr></table></figure>
+<h2 id="underscore-源码解读"><a href="#underscore-源码解读" class="headerlink" title="underscore 源码解读"></a><a href="#3">underscore 源码解读</a></h2><p><font id="3">上述代码实现了一个简单的节流函数，不过 underscore 实现了更高级的功能，即新增了两个功能</font></p>
+<ul>
+<li>配置是否需要响应事件刚开始的那次回调（ leading 参数，false 时忽略）</li>
+<li>配置是否需要响应事件结束后的那次回调（ trailing 参数，false 时忽略）<br>配置 { leading: false } 时，事件刚开始的那次回调不执行；配置 { trailing: false } 时，事件结束后的那次回调不执行，不过需要注意的是，这两者不能同时配置。</li>
+</ul>
+<p>所以在 underscore 中的节流函数有 3 种调用方式，默认的（有头有尾），设置 { leading: false } 的，以及设置 { trailing: false } 的。上面说过实现 throttle 的方案有 2 种，一种是通过时间戳判断，另一种是通过定时器创建和销毁来控制。</p>
+<p>第一种方案实现这 3 种调用方式存在一个问题，即事件停止触发时无法响应回调，所以 { trailing: true } 时无法生效。</p>
+<p>第二种方案来实现也存在一个问题，因为定时器是延迟执行的，所以事件停止触发时必然会响应回调，所以 { trailing: false } 时无法生效。</p>
+<p>underscore 采用的方案是两种方案搭配使用来实现这个功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">const throttle &#x3D; function(func, wait, options) &#123;</span><br><span class="line">  var timeout, context, args, result;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 上一次执行回调的时间戳</span><br><span class="line">  var previous &#x3D; 0;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 无传入参数时，初始化 options 为空对象</span><br><span class="line">  if (!options) options &#x3D; &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  var later &#x3D; function() &#123;</span><br><span class="line">    &#x2F;&#x2F; 当设置 &#123; leading: false &#125; 时</span><br><span class="line">    &#x2F;&#x2F; 每次触发回调函数后设置 previous 为 0</span><br><span class="line">    &#x2F;&#x2F; 不然为当前时间</span><br><span class="line">    previous &#x3D; options.leading &#x3D;&#x3D;&#x3D; false ? 0 : _.now();</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 防止内存泄漏，置为 null 便于后面根据 !timeout 设置新的 timeout</span><br><span class="line">    timeout &#x3D; null;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 执行函数</span><br><span class="line">    result &#x3D; func.apply(context, args);</span><br><span class="line">    if (!timeout) context &#x3D; args &#x3D; null;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 每次触发事件回调都执行这个函数</span><br><span class="line">  &#x2F;&#x2F; 函数内判断是否执行 func</span><br><span class="line">  &#x2F;&#x2F; func 才是我们业务层代码想要执行的函数</span><br><span class="line">  var throttled &#x3D; function() &#123;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 记录当前时间</span><br><span class="line">    var now &#x3D; _.now();</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 第一次执行时（此时 previous 为 0，之后为上一次时间戳）</span><br><span class="line">    &#x2F;&#x2F; 并且设置了 &#123; leading: false &#125;（表示第一次回调不执行）</span><br><span class="line">    &#x2F;&#x2F; 此时设置 previous 为当前值，表示刚执行过，本次就不执行了</span><br><span class="line">    if (!previous &amp;&amp; options.leading &#x3D;&#x3D;&#x3D; false) previous &#x3D; now;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 距离下次触发 func 还需要等待的时间</span><br><span class="line">    var remaining &#x3D; wait - (now - previous);</span><br><span class="line">    context &#x3D; this;</span><br><span class="line">    args &#x3D; arguments;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 要么是到了间隔时间了，随即触发方法（remaining &lt;&#x3D; 0）</span><br><span class="line">    &#x2F;&#x2F; 要么是没有传入 &#123;leading: false&#125;，且第一次触发回调，即立即触发</span><br><span class="line">    &#x2F;&#x2F; 此时 previous 为 0，wait - (now - previous) 也满足 &lt;&#x3D; 0</span><br><span class="line">    &#x2F;&#x2F; 之后便会把 previous 值迅速置为 now</span><br><span class="line">    if (remaining &lt;&#x3D; 0 || remaining &gt; wait) &#123;</span><br><span class="line">      if (timeout) &#123;</span><br><span class="line">        clearTimeout(timeout);</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; clearTimeout(timeout) 并不会把 timeout 设为 null</span><br><span class="line">        &#x2F;&#x2F; 手动设置，便于后续判断</span><br><span class="line">        timeout &#x3D; null;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      &#x2F;&#x2F; 设置 previous 为当前时间</span><br><span class="line">      previous &#x3D; now;</span><br><span class="line">      </span><br><span class="line">      &#x2F;&#x2F; 执行 func 函数</span><br><span class="line">      result &#x3D; func.apply(context, args);</span><br><span class="line">      if (!timeout) context &#x3D; args &#x3D; null;</span><br><span class="line">    &#125; else if (!timeout &amp;&amp; options.trailing !&#x3D;&#x3D; false) &#123;</span><br><span class="line">      &#x2F;&#x2F; 最后一次需要触发的情况</span><br><span class="line">      &#x2F;&#x2F; 如果已经存在一个定时器，则不会进入该 if 分支</span><br><span class="line">      &#x2F;&#x2F; 如果 &#123;trailing: false&#125;，即最后一次不需要触发了，也不会进入这个分支</span><br><span class="line">      &#x2F;&#x2F; 间隔 remaining milliseconds 后触发 later 方法</span><br><span class="line">      timeout &#x3D; setTimeout(later, remaining);</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 手动取消</span><br><span class="line">  throttled.cancel &#x3D; function() &#123;</span><br><span class="line">    clearTimeout(timeout);</span><br><span class="line">    previous &#x3D; 0;</span><br><span class="line">    timeout &#x3D; context &#x3D; args &#x3D; null;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 执行 _.throttle 返回 throttled 函数</span><br><span class="line">  return throttled;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><a href="#4">小结</a></h2><blockquote>
+<ul>
+<li>函数节流指的是某个函数在一定时间间隔内（例如 3 秒）只执行一次，在这 3 秒内 无视后来产生的函数调用请求</li>
+<li>节流可以理解为养金鱼时拧紧水龙头放水，3 秒一滴</li>
+<li>「管道中的水」就是我们频繁操作事件而不断涌入的回调任务，它需要接受「水龙头」安排</li>
+<li>「水龙头」就是节流阀，控制水的流速，过滤无效的回调任务</li>
+<li>「滴水」就是每隔一段时间执行一次函数</li>
+<li>「3 秒」就是间隔时间，它是「水龙头」决定「滴水」的依据</li>
+<li>节流实现方案有 2 种</li>
+<li>第一种是用时间戳来判断是否已到执行时间，记录上次执行的时间戳，然后每次触发事件执行回调，回调中判断当前时间戳距离上次执行时间戳的间隔是否已经达到时间差（Xms） ，如果是则执行，并更新上次执行的时间戳，如此循环。</li>
+<li>第二种方法是使用定时器，比如当 scroll 事件刚触发时，打印一个 hello world，然后设置个 1000ms 的定时器，此后每次触发 scroll 事件触发回调，如果已经存在定时器，则回调不执行方法，直到定时器触发，handler 被清除，然后重新设置定时器。</li>
+</ul>
+</blockquote>
+
+    </section>
+    <section class="extra">
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT%E6%8A%80%E6%9C%AF/" rel="tag">IT技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+      
+<nav class="nav">
+  
+    <a href="/cate/debounce/"><i class="iconfont iconleft"></i>防抖函数 debounce</a>
+  
+  
+</nav>
+
+    </section>
+    
+      <section class="comments">
+        
+          <div class="btn" id="comments-btn">查看评论</div>
+        
+        
+      </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1258390473 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/yanZhangX " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:18782271516@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</footer>
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

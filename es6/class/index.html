@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>class - 痴痴醉</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="keywords" content="xiangty, 痴痴醉,"> 
+  
+  <meta name="description" content="ES5中的近类结构ES5以及之前的版本，没有类的概念，..."> 
+  
+  <meta name="author" content="Tyler X"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate_alipay: '',
+      donate_wechat: '',
+      motto: {
+        api: '',
+        default: '痴痴醉'
+      },
+      galleries: {
+        enable: 'true'
+      },
+      fab: {
+        enable: 'true',
+        alwaysShow: 'false'
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</nav>
+
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">class</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-06-11</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>5685</span>
+    </div>
+  </div>
+</section>
+
+  <section class="main">
+    <section class="content">
+      <h3 id="ES5中的近类结构"><a href="#ES5中的近类结构" class="headerlink" title="ES5中的近类结构"></a>ES5中的近类结构</h3><p>ES5以及之前的版本，没有类的概念，但是聪明的JavaScript开发者，为了实现面向对象，创建了特殊的近类结构。</p>
+<p><strong>ES5中创建类的方法：新建一个构造函数，定义一个方法并且赋值给构造函数的原型。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="comment">//新建构造函数，默认大写字母开头</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//定义一个方法并且赋值给构造函数的原型</span></span><br><span class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">'eryue'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(p.sayName() <span class="comment">// eryue</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="ES6-class类"><a href="#ES6-class类" class="headerlink" title="ES6 class类"></a>ES6 class类</h3><p>ES6实现类非常简单，只需要类声明。推荐 [babel在线测试ES6][1] 测试下面的代码。</p>
+<h4 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h4><p>如果你学过java，那么一定会非常熟悉这种声明类的方式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">  <span class="comment">//新建构造函数</span></span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name <span class="comment">//私有属性</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//定义一个方法并且赋值给构造函数的原型</span></span><br><span class="line">  sayName() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> Person(<span class="string">'eryue'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(p.sayName()) <span class="comment">// eryue</span></span><br></pre></td></tr></table></figure>
+
+<p>和ES5中使用构造函数不同的是，在ES6中，我们将原型的实现写在了类中，但本质上还是一样的，都是需要新建一个类名，然后实现构造函数，再实现原型方法。</p>
+<p><strong>私有属性：</strong>在class中实现私有属性，只需要在构造方法中定义this.xx = xx。</p>
+<h4 id="类声明和函数声明的区别和特点"><a href="#类声明和函数声明的区别和特点" class="headerlink" title="类声明和函数声明的区别和特点"></a>类声明和函数声明的区别和特点</h4><p>1、函数声明可以被提升，类声明不能提升。</p>
+<p>2、类声明中的代码自动强行运行在严格模式下。</p>
+<p>3、类中的所有方法都是不可枚举的，而自定义类型中，可以通过Object.defineProperty()手工指定不可枚举属性。</p>
+<p>4、每个类都有一个[[construct]]的方法。</p>
+<p>5、只能使用new来调用类的构造函数。</p>
+<p>6、不能在类中修改类名。</p>
+<h4 id="类表达式"><a href="#类表达式" class="headerlink" title="类表达式"></a>类表达式</h4><p>类有2种表现形式：声明式和表达式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//匿名表达式</span></span><br><span class="line"><span class="keyword">let</span> A = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//命名表达式，B可以在外部使用，而B1只能在内部使用</span></span><br><span class="line"><span class="keyword">let</span> B = <span class="class"><span class="keyword">class</span> <span class="title">B1</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="类是一等公民"><a href="#类是一等公民" class="headerlink" title="类是一等公民"></a>类是一等公民</h4><p>JavaScript函数是一等公民，类也设计成一等公民。</p>
+<p>1、可以将类作为参数传入函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//新建一个类</span></span><br><span class="line"><span class="keyword">let</span> A = <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  sayName() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'eryue'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//该函数返回一个类的实例</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">classA</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> classA()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//给test函数传入A</span></span><br><span class="line"><span class="keyword">let</span> t = test(A)</span><br><span class="line"><span class="built_in">console</span>.log(t.sayName()) <span class="comment">// eryue</span></span><br></pre></td></tr></table></figure>
+
+<p>2、通过立即调用类构造函数可以创建单例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">  &#125;</span><br><span class="line">  sayName() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="string">'eryue'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a.sayName()) <span class="comment">// eryue</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h4><p>类支持在原型上定义访问器属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(state) &#123;</span><br><span class="line">    <span class="keyword">this</span>.state = state</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 创建getter</span></span><br><span class="line">  <span class="keyword">get</span> myName() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.state.name</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 创建setter</span></span><br><span class="line">  <span class="keyword">set</span> myName(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.state.name = name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取指定对象的自身属性描述符。自身属性描述符是指直接在对象上定义（而非从对象的原型继承）的描述符。</span></span><br><span class="line"><span class="keyword">let</span> desriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(A.prototype, <span class="string">"myName"</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"get"</span> <span class="keyword">in</span> desriptor) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(desriptor.enumerable) <span class="comment">// false 不可枚举</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="可计算成员名称"><a href="#可计算成员名称" class="headerlink" title="可计算成员名称"></a>可计算成员名称</h4><p>可计算成员是指使用方括号包裹一个表达式，如下面定义了一个变量m，然后使用[m]设置为类A的原型方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> m = <span class="string">"sayName"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">  &#125;</span><br><span class="line">  [m]() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> A(<span class="string">"eryue"</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a.sayName()) <span class="comment">// eryue</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="生成器方法"><a href="#生成器方法" class="headerlink" title="生成器方法"></a>生成器方法</h4><p>回顾一下上一章讲的生成器，生成器是一个返回迭代器的函数。在类中，我们也可以使用生成器方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  *printId() &#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> A()</span><br><span class="line"><span class="keyword">let</span> x = a.printId()</span><br><span class="line"></span><br><span class="line">x.next() <span class="comment">// &#123;done: false, value: 1&#125;</span></span><br><span class="line">x.next() <span class="comment">// &#123;done: false, value: 2&#125;</span></span><br><span class="line">x.next() <span class="comment">// &#123;done: false, value: 3&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个写法很有趣，我们新增一个原型方法稍微改动一下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  *printId() &#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">  <span class="comment">//从render方法访问printId，很熟悉吧，这就是react中经常用到的写法。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.printId()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> A()</span><br><span class="line"><span class="built_in">console</span>.log(a.render().next()) <span class="comment">// &#123;done: false, value: 1&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="静态成员"><a href="#静态成员" class="headerlink" title="静态成员"></a>静态成员</h4><p>静态成员是指在方法名或属性名前面加上static关键字，和普通方法不一样的是，static修饰的方法不能在实例中访问，只能在类中直接访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> create(name) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> A(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = A.create(<span class="string">"eryue"</span>)</span><br><span class="line"><span class="built_in">console</span>.log(a.name) <span class="comment">// eryue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> t = <span class="keyword">new</span> A()</span><br><span class="line"><span class="built_in">console</span>.log(t.create(<span class="string">"eryue"</span>)) <span class="comment">// t.create is not a function</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="继承与派生类"><a href="#继承与派生类" class="headerlink" title="继承与派生类"></a>继承与派生类</h4><p>我们在写react的时候，自定义的组件会继承React.Component。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">   <span class="keyword">constructor</span>(props)&#123;</span><br><span class="line">       <span class="keyword">super</span>(props)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>A叫做派生类</strong>，在派生类中，如果使用了构造方法，就必须使用super()。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>([a, b] = props) &#123;</span><br><span class="line">    <span class="keyword">this</span>.a = a</span><br><span class="line">    <span class="keyword">this</span>.b = b</span><br><span class="line">  &#125;</span><br><span class="line">  add() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="keyword">this</span>.b</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> t = <span class="keyword">new</span> T([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="built_in">console</span>.log(t.add()) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>关于super使用的几点要求：</strong></p>
+<p>1、只可以在派生类中使用super。派生类是指继承自其它类的新类。</p>
+<p>2、在构造函数中访问this之前要调用super()，负责初始化this。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="number">1</span> <span class="comment">// 错误，必须先写super()</span></span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、如果不想调用super，可以让类的构造函数返回一个对象。</p>
+<h4 id="类方法遮蔽"><a href="#类方法遮蔽" class="headerlink" title="类方法遮蔽"></a>类方法遮蔽</h4><p>我们可以在继承的类中重写父类的方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>([a, b] = props) &#123;</span><br><span class="line">    <span class="keyword">this</span>.a = a</span><br><span class="line">    <span class="keyword">this</span>.b = b</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//父类的add方法，求和</span></span><br><span class="line">  add() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="keyword">this</span>.b</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//重写add方法，求积</span></span><br><span class="line">  add() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a * <span class="keyword">this</span>.b</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> t = <span class="keyword">new</span> T([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="built_in">console</span>.log(t.add()) <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="静态成员继承"><a href="#静态成员继承" class="headerlink" title="静态成员继承"></a>静态成员继承</h4><p><strong>父类中的静态成员，也可以继承到派生类中。</strong>静态成员继承只能通过派生类访问，不能通过派生类的实例访问。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>([a, b] = props) &#123;</span><br><span class="line">    <span class="keyword">this</span>.a = a</span><br><span class="line">    <span class="keyword">this</span>.b = b</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> printSum([a, b] = props) &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(T.printSum([<span class="number">2</span>, <span class="number">3</span>])) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="派生自表达式的类"><a href="#派生自表达式的类" class="headerlink" title="派生自表达式的类"></a>派生自表达式的类</h4><p>很好理解，就是指父类可以是一个表达式。</p>
+<h4 id="内建对象的继承"><a href="#内建对象的继承" class="headerlink" title="内建对象的继承"></a>内建对象的继承</h4><p>有些牛逼的人觉得使用内建的Array不够爽，就希望ECMA提供一种继承内建对象的方法，然后那帮大神们就把这个功能添加到class中了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyArray</span> <span class="keyword">extends</span> <span class="title">Array</span> </span>&#123; &#125;</span><br><span class="line"><span class="keyword">let</span> colors = <span class="keyword">new</span> MyArray()</span><br><span class="line">colors[<span class="number">0</span>] = <span class="string">"1"</span></span><br><span class="line"><span class="built_in">console</span>.log(colors) <span class="comment">// [1]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Symbol-species"><a href="#Symbol-species" class="headerlink" title="Symbol.species"></a>Symbol.species</h4><p>该用法我还没有接触过，目前只知道在内建对象中使用了该方法，如果在类中调用this.constructor，使用Symbol.species可以让派生类重写返回类型。</p>
+<h4 id="在构造函数中使用new-target"><a href="#在构造函数中使用new-target" class="headerlink" title="在构造函数中使用new.target"></a>在构造函数中使用new.target</h4><p>new.target通常表示当前的构造函数名。通常我们使用new.target来阻止直接实例化基类，下面是这个例子的实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">  <span class="comment">//如果当前的new.target为A类，就抛出异常</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">new</span>.target === A) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"error haha"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> a = <span class="keyword">new</span> A()</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// error haha</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本章只有一个知识点，那就是class的使用，最开始的声明class，到后面的继承派生类，都是非常常用的写法，还有静态成员的使用。</p>
+<p>如果上面的那些例子你练习的不够爽，或许你该找个react基础demo简单的使用class来练练手了。</p>
+
+    </section>
+    <section class="extra">
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+      
+<nav class="nav">
+  
+    <a href="/es6/promise/"><i class="iconfont iconleft"></i>promise</a>
+  
+  
+    <a href="/uncategorized/mapSet/">Map和Set<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+      <section class="comments">
+        
+          <div class="btn" id="comments-btn">查看评论</div>
+        
+        
+      </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1258390473 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/yanZhangX " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:18782271516@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</footer>
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

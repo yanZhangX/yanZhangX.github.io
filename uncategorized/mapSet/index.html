@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Map和Set - 痴痴醉</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="keywords" content="xiangty, 痴痴醉,"> 
+  
+  <meta name="description" content="
+Map和Set都叫做集合，但是他们也有所不同。Set..."> 
+  
+  <meta name="author" content="Tyler X"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate_alipay: '',
+      donate_wechat: '',
+      motto: {
+        api: '',
+        default: '痴痴醉'
+      },
+      galleries: {
+        enable: 'true'
+      },
+      fab: {
+        enable: 'true',
+        alwaysShow: 'false'
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</nav>
+
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">Map和Set</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-06-11</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>4857</span>
+    </div>
+  </div>
+</section>
+
+  <section class="main">
+    <section class="content">
+      <blockquote>
+<p>Map和Set都叫做集合，但是他们也有所不同。Set常被用来检查对象中是否存在某个键名，Map集合常被用来获取已存的信息。</p>
+</blockquote>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><h4 id="Set是有序列表，含有相互独立的非重复值。"><a href="#Set是有序列表，含有相互独立的非重复值。" class="headerlink" title="Set是有序列表，含有相互独立的非重复值。"></a>Set是有序列表，含有相互独立的非重复值。</h4><h4 id="创建Set"><a href="#创建Set" class="headerlink" title="创建Set"></a>创建Set</h4><p>既然我们现在不知道Set长什么样，有什么价值，那么何不创建一个Set集合看看呢？</p>
+<p><strong>创建一个Set集合，你可以这样做：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set();</span><br><span class="line">console.log(<span class="keyword">set</span>);</span><br><span class="line"></span><br><span class="line">//在浏览器控制台的输出结果</span><br><span class="line">Set(0) &#123;&#125;</span><br><span class="line">    size:(...)</span><br><span class="line">    __proto__:<span class="built_in">Set</span></span><br><span class="line">    [[Entries]]:<span class="built_in">Array</span>(<span class="number">0</span>)</span><br><span class="line">    length:<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>看起来像个对象，那么现在我们在控制台打印一个对象，对比一下两者有什么不同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line"><span class="built_in">console</span>.log(obj)</span><br><span class="line"></span><br><span class="line"><span class="comment">//在控制台输出对象</span></span><br><span class="line"><span class="built_in">Object</span> &#123;&#125;</span><br><span class="line">    __proto__:</span><br></pre></td></tr></table></figure>
+
+<p>从输出结果看，Set和Object有明显的区别，反正他们就不是一个东西。</p>
+<p><strong>接着，我们看一下Set的原型有哪些：</strong></p>
+<p><img   class="lazyload" data-original="https://segmentfault.com/img/bVRqlN?w=858&h=652" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="clipboard.png"></p>
+<p>这里主要介绍几个基础原型的作用，想要了解全部请前往 [Set集合之家][1] 查看：</p>
+<p>Set.prototype.size<br>返回Set对象的值的个数。</p>
+<p>Set.prototype.add(value)<br>在Set对象尾部添加一个元素。返回该Set对象。</p>
+<p>Set.prototype.entries()<br>返回一个新的迭代器对象，该对象包含Set对象中的按插入顺序排列的所有元素的值的[value, value]数组。为了使这个方法和Map对象保持相似， 每个值的键和值相等。</p>
+<p>Set.prototype.forEach(callbackFn[, thisArg])<br>按照插入顺序，为Set对象中的每一个值调用一次callBackFn。如果提供了thisArg参数，回调中的this会是这个参数。</p>
+<p>Set.prototype.has(value)<br>返回一个布尔值，表示该值在Set中存在与否。</p>
+<p><strong>在例子中使用这几个方法测试一下：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set();</span><br><span class="line"><span class="keyword">set</span>.add('haha');</span><br><span class="line"><span class="keyword">set</span>.add(Symbol('haha'));</span><br><span class="line"></span><br><span class="line">console.log(<span class="keyword">set</span>.size); //2</span><br><span class="line"></span><br><span class="line">console.log(<span class="keyword">set</span>); </span><br><span class="line">Set(2) &#123;<span class="string">"haha"</span>, <span class="built_in">Symbol</span>(haha)&#125;</span><br><span class="line">    size:(...)</span><br><span class="line">    __proto__:<span class="built_in">Set</span></span><br><span class="line">    [[Entries]]:<span class="built_in">Array</span>(<span class="number">2</span>)</span><br><span class="line">        <span class="number">0</span>:<span class="string">"haha"</span></span><br><span class="line">        <span class="number">1</span>:<span class="built_in">Symbol</span>(haha)</span><br><span class="line">    length:<span class="number">2</span></span><br><span class="line">    </span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">set</span>.has('haha')) // true</span><br></pre></td></tr></table></figure>
+
+<p>到这里，你会发现Set像数组，又像一个对象，但又不完全是。</p>
+<h4 id="迭代Set"><a href="#迭代Set" class="headerlink" title="迭代Set"></a>迭代Set</h4><p>Set既然提供了entries和forEach方法，那么他就是可迭代的。</p>
+<p>但如果你使用for in来迭代Set，你不能这样做：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> sets) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">//不存在</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>for in迭代的是对象的key，而在Set中的元素没有key，<strong>使用for of来遍历</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> value <span class="keyword">of</span> sets) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//"haha"</span></span><br><span class="line"><span class="comment">//Symbol(haha)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果你需要key，则使用下面这种方法</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> [key, value] <span class="keyword">of</span> sets.entries()) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value, key);</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//"haha" "haha"</span></span><br><span class="line"><span class="comment">//Symbol(haha) Symbol(haha)</span></span><br></pre></td></tr></table></figure>
+
+
+<p><strong>forEach操作Set：</strong>Set本身没有key，而forEach方法中的key被设置成了元素本身。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sets.forEach(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value, key);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//"haha" "haha"</span></span><br><span class="line"><span class="comment">//Symbol(haha) Symbol(haha)</span></span><br><span class="line"></span><br><span class="line">sets.forEach(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">Object</span>.is(value, key));</span><br><span class="line">&#125;); </span><br><span class="line"><span class="comment">//true true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Set和Array的转换"><a href="#Set和Array的转换" class="headerlink" title="Set和Array的转换"></a>Set和Array的转换</h4><p>Set和数组太像了，Set集合的特点是没有key，没有下标，只有size和原型以及一个可迭代的不重复元素的类数组。既然这样，我们就可以把一个Set集合转换成数组，也可以把数组转换成Set。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组转换成Set</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="string">'3'</span>, <span class="string">'3'</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set(arr);</span><br><span class="line">console.log(<span class="keyword">set</span>) // Set(3) &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="string">"3"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Set转换成数组</span></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set();</span><br><span class="line"><span class="keyword">set</span>.add(1);</span><br><span class="line"><span class="keyword">set</span>.add('2');</span><br><span class="line">console.log(Array.from(<span class="keyword">set</span>)) // (2) [1, "2"]</span><br></pre></td></tr></table></figure>
+
+<p>js面试中，经常会考的一道数组去重题目，就可以使用Set集合的不可重复性来处理。经测试只能去重下面3种类型的数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">1</span>, <span class="string">'haha'</span>, <span class="string">'haha'</span>, <span class="literal">null</span>, <span class="literal">null</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new Set(arr);</span><br><span class="line">console.log(Array.from(<span class="keyword">set</span>)) // [1, 'haha', null]</span><br><span class="line">console.log([...<span class="keyword">set</span>]) // [1, 'haha', null]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Weak-Set集合"><a href="#Weak-Set集合" class="headerlink" title="Weak Set集合"></a>Weak Set集合</h3><p>Set集合本身是强引用，只要new Set()实例化的引用存在，就不释放内存，这样一刀切肯定不好啊，比如你定义了一个DOM元素的Set集合，然后在某个js中引用了该实例，但是当页面关闭或者跳转时，你希望该引用应立即释放内存，Set不听话，那好，你还可以使用 [Weak Set][2]</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">WeakSet</span>([iterable]);</span><br></pre></td></tr></table></figure>
+
+<p><strong>和Set的区别：</strong></p>
+<p>1、<strong>WeakSet 对象中只能存放对象值</strong>, 不能存放原始值, 而 Set 对象都可以.</p>
+<p>2、WeakSet 对象中存储的对象值都是被弱引用的, 如果没有其他的变量或属性引用这个对象值, 则这个对象值会被当成垃圾回收掉. 正因为这样, <strong>WeakSet 对象是无法被枚举的</strong>, 没有办法拿到它包含的所有元素.</p>
+<p><strong>使用：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">set</span> = new WeakSet();</span><br><span class="line">const class_1 = &#123;&#125;, class_2 = &#123;&#125;;</span><br><span class="line"><span class="keyword">set</span>.add(class_1);</span><br><span class="line"><span class="keyword">set</span>.add(class_2);</span><br><span class="line">console.log(<span class="keyword">set</span>) // WeakSet &#123;<span class="built_in">Object</span> &#123;&#125;, <span class="built_in">Object</span> &#123;&#125;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">set</span>.has(class_1)) // true</span><br><span class="line">console.log(<span class="keyword">set</span>.has(class_2)) // true</span><br></pre></td></tr></table></figure>
+
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><h4 id="Map是存储许多键值对的有序列表，key和value支持所有数据类型。"><a href="#Map是存储许多键值对的有序列表，key和value支持所有数据类型。" class="headerlink" title="Map是存储许多键值对的有序列表，key和value支持所有数据类型。"></a>Map是存储许多键值对的有序列表，key和value支持所有数据类型。</h4><h4 id="创建Map"><a href="#创建Map" class="headerlink" title="创建Map"></a>创建Map</h4><p>如果说Set像数组，那么Map更像对象。而对象中的key只支持字符串，Map更加强大，支持所有数据类型，不管是数字、字符串、Symbol等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个空Map集合</span></span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>()</span><br><span class="line"><span class="built_in">console</span>.log(map)</span><br></pre></td></tr></table></figure>
+
+<p><img   class="lazyload" data-original="https://segmentfault.com/img/bVRqxA?w=548&h=188" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="clipboard.png"></p>
+<p><strong>Map的所有原型方法：</strong><br><img   class="lazyload" data-original="https://segmentfault.com/img/bVRqxE?w=874&h=654" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  alt="clipboard.png"></p>
+<p>对比Set集合的原型，<strong>Map集合的原型多了set()和get()方法</strong>，注意set()和Set集合不是一个东西。Map没有add，使用set()添加key，value，在Set集合中，使用add()添加value，没有key。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">map.set(<span class="string">'name'</span>, <span class="string">'haha'</span>);</span><br><span class="line">map.set(<span class="string">'id'</span>, <span class="number">10</span>);</span><br><span class="line"><span class="built_in">console</span>.log(map)</span><br><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line"><span class="built_in">Map</span>(<span class="number">2</span>) &#123;<span class="string">"name"</span> =&gt; <span class="string">"haha"</span>, <span class="string">"id"</span> =&gt; <span class="number">10</span>&#125;</span><br><span class="line">    size:(...)</span><br><span class="line">    __proto__:<span class="built_in">Map</span></span><br><span class="line">    [[Entries]]:<span class="built_in">Array</span>(<span class="number">2</span>)</span><br><span class="line">        <span class="number">0</span>:&#123;<span class="string">"name"</span> =&gt; <span class="string">"haha"</span>&#125;</span><br><span class="line">        <span class="number">1</span>:&#123;<span class="string">"id"</span> =&gt; <span class="number">10</span>&#125;</span><br><span class="line">    length:<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'id'</span>)) <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(map.get(<span class="string">'name'</span>)) <span class="comment">// "haha"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用对象做key</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="keyword">const</span> key = &#123;&#125;;</span><br><span class="line">map.set(key, <span class="string">'谁知道这是个什么玩意'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(map.get(key)) <span class="comment">// 谁知道这是个什么玩意</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Map同样可以使用forEach遍历key、value</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="keyword">const</span> key = &#123;&#125;;</span><br><span class="line">map.set(key, <span class="string">'这是个什么玩意'</span>);</span><br><span class="line">map.set(<span class="string">'name'</span>, <span class="string">'haha'</span>);</span><br><span class="line">map.set(<span class="string">'id'</span>, <span class="number">1</span>);</span><br><span class="line">map.forEach(<span class="function">(<span class="params">value, key</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(key, value)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//Object &#123;&#125; "这是个什么玩意"</span></span><br><span class="line"><span class="comment">//"name" "haha"</span></span><br><span class="line"><span class="comment">//"id" 1</span></span><br></pre></td></tr></table></figure>
+
+<p>其他Map的使用方法可以前往 [Map之家][3] 学习。</p>
+<h3 id="Weak-Map"><a href="#Weak-Map" class="headerlink" title="Weak Map"></a>Weak Map</h3><p>有强Map，就有弱鸡Map。</p>
+<p>和Set要解决的问题一样，希望不再引用Map的时候自动触发垃圾回收机制。那么，你就需要Weak Map。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</span><br><span class="line"><span class="keyword">const</span> key = <span class="built_in">document</span>.querySelector(<span class="string">'.header'</span>);</span><br><span class="line">map.set(key, <span class="string">'这是个什么玩意'</span>);</span><br><span class="line"></span><br><span class="line">map.get(key) <span class="comment">// "这是个什么玩意"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//移除该元素</span></span><br><span class="line">key.parentNode.removeChild(key);</span><br><span class="line">key = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Set集合可以用来过滤数组中重复的元素，只能通过has方法检测指定的值是否存在，或者是通过forEach处理每个值。</p>
+<p>Weak Set集合存放对象的弱引用，当该对象的其他强引用被清除时，集合中的弱引用也会自动被垃圾回收机制回收，追踪成组的对象是该集合最好的使用方式。</p>
+<p>Map集合通过set()添加键值对，通过get()获取键值，各种方法的使用查看文章教程，你可以把它看成是比Object更加强大的对象。</p>
+<p>Weak Map集合只支持对象类型的key，所有key都是弱引用，当该对象的其他强引用被清除时，集合中的弱引用也会自动被垃圾回收机制回收，为那些实际使用与生命周期管理分离的对象添加额外信息是非常适合的使用方式。</p>
+<p>记得刚开始学习JavaScript的时候，不知道各种数据类型有什么用，如果你现在刚学习Map和Set也是这种不知道能用来干什么的想法，那么，恭喜，他们已经开始走入你的编程生涯，慢慢的你就会熟悉他们。</p>
+
+    </section>
+    <section class="extra">
+      
+      
+
+      
+<nav class="nav">
+  
+    <a href="/es6/class/"><i class="iconfont iconleft"></i>class</a>
+  
+  
+    <a href="/es6/symbol/">Symbol和Symbol属性<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+      <section class="comments">
+        
+          <div class="btn" id="comments-btn">查看评论</div>
+        
+        
+      </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1258390473 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/yanZhangX " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:18782271516@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</footer>
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

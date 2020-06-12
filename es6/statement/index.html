@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>声明方式 - 痴痴醉</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="keywords" content="xiangty, 痴痴醉,"> 
+  
+  <meta name="description" content="
+ES6之前我们在声明时只有使用var来进行声明，ES..."> 
+  
+  <meta name="author" content="Tyler X"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate_alipay: '',
+      donate_wechat: '',
+      motto: {
+        api: '',
+        default: '痴痴醉'
+      },
+      galleries: {
+        enable: 'true'
+      },
+      fab: {
+        enable: 'true',
+        alwaysShow: 'false'
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</nav>
+
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">声明方式</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-06-10</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6133</span>
+    </div>
+  </div>
+</section>
+
+  <section class="main">
+    <section class="content">
+      <blockquote><font face="微软雅黑" id="1">
+ES6之前我们在声明时只有使用var来进行声明，ES6对声明的进行了扩展，现在有三种声明方式
+</font></blockquote>
+<p>字面理解ES6的三种声明方式：<br><code>var</code>：它是variable的简写，可以理解成变量的意思。<br><code>let</code>：它在英文中是“让”的意思，也可以理解为一种声明的意思。<br><code>const</code>：它在英文中也是常量的意思，在ES6也是用来声明常量的，常量你可以简单理解为不变的</p>
+<h2 id="var声明："><a href="#var声明：" class="headerlink" title="var声明："></a><a href="#1">var声明：</a></h2><blockquote><font face="微软雅黑" id="1">
+JavaScript中，我们通常说的作用域是函数作用域，使用var声明的变量，无论是在代码的哪个地方声明的，都会提升到当前作用域的最顶部，这种行为叫做变量提升（Hoisting）
+</font></blockquote>
+<p>通过 var 声明的变量存在变量提升的特性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (condition) &#123;</span><br><span class="line">    var value &#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line">console.log(value);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因为变量提升的原因，实际执行如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var value;</span><br><span class="line">if (condition) &#123;</span><br><span class="line">    value &#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line">console.log(value);</span><br></pre></td></tr></table></figure>
+<p>如果 condition 为 false，结果会是 undefined。</p>
+<blockquote>
+<p>除此之外，在 for 循环中：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (var i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">console.log(i); &#x2F;&#x2F; 10</span><br></pre></td></tr></table></figure>
+<p>即便循环已经结束了，我们依然可以访问 i 的值。</p>
+<blockquote>
+<p>为了加强对变量生命周期的控制，ECMAScript 6 引入了块级作用域。</p>
+</blockquote>
+<p>块级作用域存在于：</p>
+<ul>
+<li>函数内部</li>
+<li>块中(字符 { 和 } 之间的区域)</li>
+</ul>
+<h2 id="let-和-const"><a href="#let-和-const" class="headerlink" title="let 和 const"></a><a href="#2">let 和 const</a></h2><blockquote><font face="微软雅黑" id="2">
+块级声明用于声明在指定块的作用域之外无法访问的变量。
+let 和 const 都是块级声明的一种。
+</font></blockquote>
+
+<h5 id="1-不会被提升"><a href="#1-不会被提升" class="headerlink" title="1.不会被提升"></a>1.不会被提升</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (false) &#123;</span><br><span class="line">    let value &#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line">console.log(value); &#x2F;&#x2F; Uncaught ReferenceError: value is not defined</span><br></pre></td></tr></table></figure>
+<h5 id="2-重复声明报错"><a href="#2-重复声明报错" class="headerlink" title="2.重复声明报错"></a>2.重复声明报错</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var value &#x3D; 1;</span><br><span class="line">let value &#x3D; 2; &#x2F;&#x2F; Uncaught SyntaxError: Identifier &#39;value&#39; has already been declared</span><br></pre></td></tr></table></figure>
+<h5 id="3-不绑定全局作用域"><a href="#3-不绑定全局作用域" class="headerlink" title="3.不绑定全局作用域"></a>3.不绑定全局作用域</h5><blockquote>
+<p>当在全局作用域中使用 var 声明的时候，会创建一个新的全局变量作为全局对象的属性。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var value &#x3D; 1;</span><br><span class="line">console.log(window.value); &#x2F;&#x2F; 1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>然而 let 和 const 不会：</p>
+</blockquote>
+<p>let value = 1;<br>console.log(window.value); // undefined</p>
+<p>再来说下 let 和 const 的区别：<br>const 用于声明常量，其值一旦被设定不能再被修改，否则会报错。</p>
+<blockquote>
+<p>值得一提的是：const 声明不允许修改绑定，但允许修改值。这意味着当用 const 声明对象时：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const data &#x3D; &#123;</span><br><span class="line">    value: 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 没有问题</span><br><span class="line">data.value &#x3D; 2;</span><br><span class="line">data.num &#x3D; 3;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 报错</span><br><span class="line">data &#x3D; &#123;&#125;; &#x2F;&#x2F; Uncaught TypeError: Assignment to constant variable.</span><br></pre></td></tr></table></figure>
+<h2 id="临时死区"><a href="#临时死区" class="headerlink" title="临时死区"></a><a href="#3">临时死区</a></h2><blockquote><p>临时死区(Temporal Dead Zone)，简写为 <code id="3">TDZ</code>。<br>let 和 const 声明的变量不会被提升到作用域顶部，如果在声明之前访问这些变量，会导致报错：</p>
+</blockquote>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(typeof value); &#x2F;&#x2F; Uncaught ReferenceError: value is not defined</span><br><span class="line">let value &#x3D; 1;</span><br></pre></td></tr></table></figure>
+<p>这是因为 JavaScript 引擎在扫描代码发现变量声明时，要么将它们提升到作用域顶部(遇到 var 声明)，要么将声明放在 <code>TDZ</code> 中(遇到 let 和 const 声明)。访问 <code>TDZ</code> 中的变量会触发运行时错误。只有执行过变量声明语句后，变量才会从 <code>TDZ</code> 中移出，然后方可访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var value &#x3D; &quot;global&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 例子1</span><br><span class="line">(function() &#123;</span><br><span class="line">    console.log(value);</span><br><span class="line"></span><br><span class="line">    let value &#x3D; &#39;local&#39;;</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 例子2</span><br><span class="line">&#123;</span><br><span class="line">    console.log(value);</span><br><span class="line"></span><br><span class="line">    const value &#x3D; &#39;local&#39;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>两个例子中，结果并不会打印 “global”，而是报错 Uncaught ReferenceError: value is not defined，就是因为 <code>TDZ</code> 的缘故。</p>
+<h2 id="循环中的块级作用域"><a href="#循环中的块级作用域" class="headerlink" title="循环中的块级作用域"></a><a href="#4">循环中的块级作用域</a></h2><p><font id="4"></font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var funcs &#x3D; [];</span><br><span class="line">for (var i &#x3D; 0; i &lt; 3; i++) &#123;</span><br><span class="line">    funcs[i] &#x3D; function () &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">funcs[0](); &#x2F;&#x2F; 3</span><br></pre></td></tr></table></figure>
+<p>一个老生常谈的面试题，解决方案如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var funcs &#x3D; [];</span><br><span class="line">for (var i &#x3D; 0; i &lt; 3; i++) &#123;</span><br><span class="line">    funcs[i] &#x3D; (function(i)&#123;</span><br><span class="line">        return function() &#123;</span><br><span class="line">            console.log(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;(i))</span><br><span class="line">&#125;</span><br><span class="line">funcs[0](); &#x2F;&#x2F; 0</span><br></pre></td></tr></table></figure>
+<p>ES6 的 let 为这个问题提供了新的解决方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var funcs &#x3D; [];</span><br><span class="line">for (let i &#x3D; 0; i &lt; 3; i++) &#123;</span><br><span class="line">    funcs[i] &#x3D; function () &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">funcs[0](); &#x2F;&#x2F; 0</span><br></pre></td></tr></table></figure>
+<p>问题在于，上面讲了 let 不提升，不能重复声明，不能绑定全局作用域等等特性，可是为什么在这里就能正确打印出 i 值呢？</p>
+<p>如果是不重复声明，在循环第二次的时候，又用 let 声明了 i，应该报错呀，就算因为某种原因，重复声明不报错，一遍一遍迭代，i 的值最终还是应该是 3 呀，还有人说 for 循环的<br>设置循环变量的那部分是一个单独的作用域，就比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (let i &#x3D; 0; i &lt; 3; i++) &#123;</span><br><span class="line">  let i &#x3D; &#39;abc&#39;;</span><br><span class="line">  console.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; abc</span><br><span class="line">&#x2F;&#x2F; abc</span><br><span class="line">&#x2F;&#x2F; abc</span><br></pre></td></tr></table></figure>
+<p>这个例子是对的，如果我们把 let 改成 var 呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (var i &#x3D; 0; i &lt; 3; i++) &#123;</span><br><span class="line">  var i &#x3D; &#39;abc&#39;;</span><br><span class="line">  console.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; abc</span><br></pre></td></tr></table></figure>
+<p>为什么结果就不一样了呢，如果有单独的作用域，结果应该是相同的</p>
+<p>如果要追究这个问题，就要抛弃掉之前所讲的这些特性！这是因为 let 声明在循环内部的行为是标准中专门定义的，不一定就与 let 的不提升特性有关，其实，在早期的 let 实现中就不包含这一行为。</p>
+<p>在 for 循环中使用 let 和 var，底层会使用不同的处理方式。</p>
+<p>那么当使用 let 的时候底层到底是怎么做的呢？</p>
+<p>简单的来说，就是在 <code>for (let i = 0; i < 3; i++)</code> 中，即圆括号之内建立一个隐藏的作用域，这就可以解释为什么:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (let i &#x3D; 0; i &lt; 3; i++) &#123;</span><br><span class="line">  let i &#x3D; &#39;abc&#39;;</span><br><span class="line">  console.log(i);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; abc</span><br><span class="line">&#x2F;&#x2F; abc</span><br><span class="line">&#x2F;&#x2F; abc</span><br></pre></td></tr></table></figure>
+<p>然后每次迭代循环时都创建一个新变量，并以之前迭代中同名变量的值将其初始化。这样对于下面这样一段代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var funcs &#x3D; [];</span><br><span class="line">for (let i &#x3D; 0; i &lt; 3; i++) &#123;</span><br><span class="line">    funcs[i] &#x3D; function () &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">funcs[0](); &#x2F;&#x2F; 0</span><br></pre></td></tr></table></figure>
+<p>就相当于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 伪代码</span><br><span class="line">(let i &#x3D; 0) &#123;</span><br><span class="line">    funcs[0] &#x3D; function() &#123;</span><br><span class="line">        console.log(i)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(let i &#x3D; 1) &#123;</span><br><span class="line">    funcs[1] &#x3D; function() &#123;</span><br><span class="line">        console.log(i)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(let i &#x3D; 2) &#123;</span><br><span class="line">    funcs[2] &#x3D; function() &#123;</span><br><span class="line">        console.log(i)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>当执行函数的时候，根据词法作用域就可以找到正确的值，其实也可以理解为 <code>let</code> 声明模仿了闭包的做法来简化循环过程。</p>
+<h2 id="循环中的-let-和-const"><a href="#循环中的-let-和-const" class="headerlink" title="循环中的 let 和 const"></a><a href="#5">循环中的 let 和 const</a></h2><blockquote><p><font>如果我们把 let 改成 const</font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var funcs &#x3D; [];</span><br><span class="line">for (const i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">    funcs[i] &#x3D; function () &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">funcs[0](); &#x2F;&#x2F; Uncaught TypeError: Assignment to constant variable.</span><br></pre></td></tr></table></figure>
+<p>结果会是报错，因为虽然我们每次都创建了一个新的变量，然而我们却在迭代中尝试修改 <code>const</code> 的值，所以最终会报错。</p>
+<p>还有 <code>for in</code> 循环呢~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var funcs &#x3D; [], object &#x3D; &#123;a: 1, b: 1, c: 1&#125;;</span><br><span class="line">for (var key in object) &#123;</span><br><span class="line">    funcs.push(function()&#123;</span><br><span class="line">        console.log(key)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">funcs[0]() &#x2F;&#x2F; &#39;c&#39;</span><br></pre></td></tr></table></figure>
+<p>那如果把 <code>var</code> 改成 <code>let</code> 或者 <code>const</code> 呢？</p>
+<p>使用 <code>let</code>，结果自然会是 ‘a’，<code>const</code> 呢？ 报错还是 ‘a’?</p>
+<p>结果是正确打印 ‘a’，这是因为在 for in 循环中，每次迭代不会修改已有的绑定，而是会创建一个新的绑定。</p>
+<h3 id="Babel"><a href="#Babel" class="headerlink" title="Babel"></a><a href="#6">Babel</a></h3><blockquote><p><font>在 Babel 中是如何编译 let 和 const 的呢？编译过程如下：</font></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let value &#x3D; 1;</span><br></pre></td></tr></table></figure>
+<p>编译为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var value &#x3D; 1;</span><br></pre></td></tr></table></figure>
+<p>可以看到 <code>Babel</code> 直接将 <code>let</code> 编译成了 <code>var</code>，如果是这样的话，那么写个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (false) &#123;</span><br><span class="line">    let value &#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line">console.log(value); &#x2F;&#x2F; Uncaught ReferenceError: value is not defined</span><br></pre></td></tr></table></figure>
+<p>如果还是直接编译成 <code>var</code>，打印的结果肯定是 <code>undefined</code>，然而 <code>Babel</code> 很聪明，它编译成了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (false) &#123;</span><br><span class="line">    var _value &#x3D; 1;</span><br><span class="line">&#125;</span><br><span class="line">console.log(value);</span><br></pre></td></tr></table></figure>
+<p>再写个直观的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let value &#x3D; 1;</span><br><span class="line">&#123;</span><br><span class="line">    let value &#x3D; 2;</span><br><span class="line">&#125;</span><br><span class="line">value &#x3D; 3;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var value &#x3D; 1;</span><br><span class="line">&#123;</span><br><span class="line">    var _value &#x3D; 2;</span><br><span class="line">&#125;</span><br><span class="line">value &#x3D; 3;</span><br></pre></td></tr></table></figure>
+<p>本质是一样的，就是改变量名，使内外层的变量名称不一样。</p>
+<p>那像 const 的修改值时报错，以及重复声明报错怎么实现的呢？</p>
+<p>其实就是在编译的时候直接给你报错……</p>
+<blockquote>
+<p>循环中的 let 声明</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var funcs &#x3D; [];</span><br><span class="line">for (let i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">    funcs[i] &#x3D; function () &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">funcs[0](); &#x2F;&#x2F; 0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Babel 巧妙的编译成了：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var funcs &#x3D; [];</span><br><span class="line"></span><br><span class="line">var _loop &#x3D; function _loop(i) &#123;</span><br><span class="line">    funcs[i] &#x3D; function () &#123;</span><br><span class="line">        console.log(i);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">for (var i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">    _loop(i);</span><br><span class="line">&#125;</span><br><span class="line">funcs[0](); &#x2F;&#x2F; 0</span><br></pre></td></tr></table></figure>
+
+    </section>
+    <section class="extra">
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+      
+<nav class="nav">
+  
+    <a href="/es6/arrow/"><i class="iconfont iconleft"></i>箭头函数</a>
+  
+  
+    <a href="/es6/initEs6/">ES6的开发环境搭建<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+      <section class="comments">
+        
+          <div class="btn" id="comments-btn">查看评论</div>
+        
+        
+      </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1258390473 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/yanZhangX " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:18782271516@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</footer>
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

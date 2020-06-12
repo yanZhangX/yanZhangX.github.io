@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖函数 debounce - 痴痴醉</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="keywords" content="xiangty, 痴痴醉,"> 
+  
+  <meta name="description" content="定义及解读
+防抖函数 debounce 指的是某个函数..."> 
+  
+  <meta name="author" content="Tyler X"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate_alipay: '',
+      donate_wechat: '',
+      motto: {
+        api: '',
+        default: '痴痴醉'
+      },
+      galleries: {
+        enable: 'true'
+      },
+      fab: {
+        enable: 'true',
+        alwaysShow: 'false'
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</nav>
+
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img   class="lazyload" data-original="http://qbc7qczkg.bkt.clouddn.com/v2-e6cb1d3feeda661619c531818af82b06_r.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">防抖函数 debounce</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-05-30</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>6069</span>
+    </div>
+  </div>
+</section>
+
+  <section class="main">
+    <section class="content">
+      <h2 id="定义及解读"><a href="#定义及解读" class="headerlink" title="定义及解读"></a><a href="#1">定义及解读</a></h2><blockquote><font face="微软雅黑" id="1">
+防抖函数 debounce 指的是某个函数在某段时间内，无论触发了多少次回调，都只执行最后一次。假如我们设置了一个等待时间 3 秒的函数，在这 3 秒内如果遇到函数调用请求就重新计时 3 秒，直至新的 3 秒内没有函数调用请求，此时执行函数，不然就以此类推重新计时。
+</font></blockquote>
+<p>举一个小例子：假定在做公交车时，司机需等待最后一个人进入后再关门，每次新进一个人，司机就会把计时器清零并重新开始计时，重新等待 1 分钟再关门，如果后续 1 分钟内都没有乘客上车，司机会认为乘客都上来了，将关门发车。</p>
+<p>此时「上车的乘客」就是我们频繁操作事件而不断涌入的回调任务；「1 分钟」就是计时器，它是司机决定「关门」的依据，如果有新的「乘客」上车，将清零并重新计时；「关门」就是最后需要执行的函数。</p>
+<h2 id="原理及实现"><a href="#原理及实现" class="headerlink" title="原理及实现"></a><a href="#2">原理及实现</a></h2><blockquote><font face="微软雅黑" id="2">
+实现原理就是利用定时器，函数第一次执行时设定一个定时器，之后调用时发现已经设定过定时器就清空之前的定时器，并重新设定一个新的定时器，如果存在没有被清空的定时器，当定时器计时结束后触发函数执行。
+</font></blockquote>
+
+<h5 id="实现1"><a href="#实现1" class="headerlink" title="实现1"></a>实现1</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现 1</span></span><br><span class="line"><span class="comment">// fn 是需要防抖处理的函数</span></span><br><span class="line"><span class="comment">// wait 是时间间隔</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, wait = <span class="number">50</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 通过闭包缓存一个定时器 id</span></span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="comment">// 将 debounce 处理结果当作函数返回</span></span><br><span class="line">    <span class="comment">// 触发事件回调时执行这个返回函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">      	<span class="comment">// 如果已经设定过定时器就清空上一次的定时器</span></span><br><span class="line">        <span class="keyword">if</span> (timer) clearTimeout(timer)</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// 开始设定一个新的定时器，定时器结束后执行传入的函数 fn</span></span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, args)</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DEMO</span></span><br><span class="line"><span class="comment">// 执行 debounce 函数返回新函数</span></span><br><span class="line"><span class="keyword">const</span> betterFn = debounce(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'fn 防抖执行了'</span>), <span class="number">1000</span>)</span><br><span class="line"><span class="comment">// 停止滑动 1 秒后执行函数 () =&gt; console.log('fn 防抖执行了')</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'scroll'</span>, betterFn)</span><br></pre></td></tr></table></figure>
+<h5 id="实现-2"><a href="#实现-2" class="headerlink" title="实现 2"></a>实现 2</h5><blockquote>
+<p>上述实现方案已经可以解决大部分使用场景了，不过想要实现第一次触发回调事件就执行 fn 有点力不从心了，这时候我们来改写下 debounce 函数，加上第一次触发立即执行的功能。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现 2</span></span><br><span class="line"><span class="comment">// immediate 表示第一次是否立即执行</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, wait = <span class="number">50</span>, immediate</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) clearTimeout(timer)</span><br><span class="line">      </span><br><span class="line">      	<span class="comment">// ------ 新增部分 start ------ </span></span><br><span class="line">      	<span class="comment">// immediate 为 true 表示第一次触发后执行</span></span><br><span class="line">      	<span class="comment">// timer 为空表示首次触发</span></span><br><span class="line">        <span class="keyword">if</span> (immediate &amp;&amp; !timer) &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, args)</span><br><span class="line">        &#125;</span><br><span class="line">      	<span class="comment">// ------ 新增部分 end ------ </span></span><br><span class="line">      	</span><br><span class="line">        timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, args)</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DEMO</span></span><br><span class="line"><span class="comment">// 执行 debounce 函数返回新函数</span></span><br><span class="line"><span class="keyword">const</span> betterFn = debounce(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'fn 防抖执行了'</span>), <span class="number">1000</span>, <span class="literal">true</span>)</span><br><span class="line"><span class="comment">// 第一次触发 scroll 执行一次 fn，后续只有在停止滑动 1 秒后才执行函数 fn</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'scroll'</span>, betterFn)</span><br></pre></td></tr></table></figure>
+<h2 id="加强版-throttle"><a href="#加强版-throttle" class="headerlink" title="加强版 throttle"></a><a href="#3">加强版 throttle</a></h2><blockquote>
+<p><font id="3">现在考虑一种情况，如果用户的操作非常频繁，不等设置的延迟时间结束就进行下次操作，会频繁的清除计时器并重新生成，所以函数 fn 一直都没办法执行，导致用户操作迟迟得不到响应。</font></p>
+</blockquote>
+<blockquote>
+<p>有一种思想是将「节流」和「防抖」合二为一，变成加强版的节流函数，关键点在于「 wait 时间内，可以重新生成定时器，但只要 wait 的时间到了，必须给用户一个响应」。这种合体思路恰好可以解决上面提出的问题。</p>
+</blockquote>
+<p>给出合二为一的代码之前先来回顾下 throttle 函数，上一小节中有详细的介绍。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fn 是需要执行的函数</span></span><br><span class="line"><span class="comment">// wait 是时间间隔</span></span><br><span class="line"><span class="keyword">const</span> throttle = <span class="function">(<span class="params">fn, wait = <span class="number">50</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 上一次执行 fn 的时间</span></span><br><span class="line">  <span class="keyword">let</span> previous = <span class="number">0</span></span><br><span class="line">  <span class="comment">// 将 throttle 处理结果当作函数返回</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取当前时间，转换成时间戳，单位毫秒</span></span><br><span class="line">    <span class="keyword">let</span> now = +<span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="comment">// 将当前时间和上一次执行函数的时间进行对比</span></span><br><span class="line">    <span class="comment">// 大于等待时间就把 previous 设置为当前时间并执行函数 fn</span></span><br><span class="line">    <span class="keyword">if</span> (now - previous &gt; wait) &#123;</span><br><span class="line">      previous = now</span><br><span class="line">      fn.apply(<span class="keyword">this</span>, args)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结合 throttle 和 debounce 代码，加强版节流函数 throttle 如下，新增逻辑在于当前触发时间和上次触发的时间差小于时间间隔时，设立一个新的定时器，相当于把 debounce 代码放在了小于时间间隔部分。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fn 是需要节流处理的函数</span></span><br><span class="line"><span class="comment">// wait 是时间间隔</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// previous 是上一次执行 fn 的时间</span></span><br><span class="line">  <span class="comment">// timer 是定时器</span></span><br><span class="line">  <span class="keyword">let</span> previous = <span class="number">0</span>, timer = <span class="literal">null</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 将 throttle 处理结果当作函数返回</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取当前时间，转换成时间戳，单位毫秒</span></span><br><span class="line">    <span class="keyword">let</span> now = +<span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// ------ 新增部分 start ------ </span></span><br><span class="line">    <span class="comment">// 判断上次触发的时间和本次触发的时间差是否小于时间间隔</span></span><br><span class="line">    <span class="keyword">if</span> (now - previous &lt; wait) &#123;</span><br><span class="line">    	 <span class="comment">// 如果小于，则为本次触发操作设立一个新的定时器</span></span><br><span class="line">       <span class="comment">// 定时器时间结束后执行函数 fn </span></span><br><span class="line">       <span class="keyword">if</span> (timer) clearTimeout(timer)</span><br><span class="line">       timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          previous = now</span><br><span class="line">        	fn.apply(<span class="keyword">this</span>, args)</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    <span class="comment">// ------ 新增部分 end ------ </span></span><br><span class="line">      </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="comment">// 第一次执行</span></span><br><span class="line">       <span class="comment">// 或者时间间隔超出了设定的时间间隔，执行函数 fn</span></span><br><span class="line">       previous = now</span><br><span class="line">       fn.apply(<span class="keyword">this</span>, args)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DEMO</span></span><br><span class="line"><span class="comment">// 执行 throttle 函数返回新函数</span></span><br><span class="line"><span class="keyword">const</span> betterFn = throttle(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'fn 节流执行了'</span>), <span class="number">1000</span>)</span><br><span class="line"><span class="comment">// 第一次触发 scroll 执行一次 fn，每隔 1 秒后执行一次函数 fn，停止滑动 1 秒后再执行函数 fn</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'scroll'</span>, betterFn)</span><br></pre></td></tr></table></figure>
+
+<h2 id="underscore-源码解读"><a href="#underscore-源码解读" class="headerlink" title="underscore 源码解读"></a><a href="#4">underscore 源码解读</a></h2><p><font id="4">现在来学习下 underscore 是如何实现 debounce 函数的，学习一下优秀的思想，直接上代码和注释，本源码解析依赖于 underscore 1.9.1 版本实现。</font></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此处的三个参数上文都有解释</span></span><br><span class="line">_.debounce = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, immediate</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// timeout 表示定时器</span></span><br><span class="line">  <span class="comment">// result 表示 func 执行返回值</span></span><br><span class="line">  <span class="keyword">var</span> timeout, result;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 定时器计时结束后</span></span><br><span class="line">  <span class="comment">// 1、清空计时器，使之不影响下次连续事件的触发</span></span><br><span class="line">  <span class="comment">// 2、触发执行 func</span></span><br><span class="line">  <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params">context, args</span>) </span>&#123;</span><br><span class="line">    timeout = <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">// if (args) 判断是为了过滤立即触发的</span></span><br><span class="line">    <span class="comment">// 关联在于 _.delay 和 restArguments</span></span><br><span class="line">    <span class="keyword">if</span> (args) result = func.apply(context, args);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将 debounce 处理结果当作函数返回</span></span><br><span class="line">  <span class="keyword">var</span> debounced = restArguments(<span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (timeout) clearTimeout(timeout);</span><br><span class="line">    <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">      <span class="comment">// 第一次触发后会设置 timeout，</span></span><br><span class="line">      <span class="comment">// 根据 timeout 是否为空可以判断是否是首次触发</span></span><br><span class="line">      <span class="keyword">var</span> callNow = !timeout;</span><br><span class="line">      timeout = setTimeout(later, wait);</span><br><span class="line">      <span class="keyword">if</span> (callNow) result = func.apply(<span class="keyword">this</span>, args);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    	<span class="comment">// 设置定时器</span></span><br><span class="line">      timeout = _.delay(later, wait, <span class="keyword">this</span>, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 新增 手动取消</span></span><br><span class="line">  debounced.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    clearTimeout(timeout);</span><br><span class="line">    timeout = <span class="literal">null</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> debounced;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据给定的毫秒 wait 延迟执行函数 func</span></span><br><span class="line">_.delay = restArguments(<span class="function"><span class="keyword">function</span>(<span class="params">func, wait, args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> func.apply(<span class="literal">null</span>, args);</span><br><span class="line">  &#125;, wait);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>相比上文的基本版实现，underscore 多了以下几点功能。</p>
+<blockquote>
+<ul>
+<li>函数 func 的执行结束后返回结果值 result</li>
+<li>定时器计时结束后清除 timeout，使之不影响下次连续事件的触发</li>
+<li>新增了手动取消功能 cancel</li>
+<li>immediate 为 true 后只会在第一次触发时执行，频繁触发回调结束后不会再执行</li>
+</ul>
+</blockquote>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><a href="#5">小结</a></h2><ul>
+<li>函数节流和防抖都是「闭包」、「高阶函数」的应用</li>
+<li>函数节流 throttle 指的是某个函数在一定时间间隔内（例如 3 秒）执行一次，在这 3 秒内 无视后来产生的函数调用请求<ul>
+<li>节流可以理解为养金鱼时拧紧水龙头放水，3 秒一滴<ul>
+<li>「管道中的水」就是我们频繁操作事件而不断涌入的回调任务，它需要接受「水龙头」安排</li>
+<li>「水龙头」就是节流阀，控制水的流速，过滤无效的回调任务</li>
+<li>「滴水」就是每隔一段时间执行一次函数</li>
+<li>「3 秒」就是间隔时间，它是「水龙头」决定「滴水」的依据</li>
+</ul>
+</li>
+<li>应用：监听滚动事件添加节流函数后，每隔固定的一段时间执行一次</li>
+<li>实现方案 1：用时间戳来判断是否已到执行时间，记录上次执行的时间戳，然后每次触发后执行回调，判断当前时间距离上次执行时间的间隔是否已经达到时间差（Xms） ，如果是则执行，并更新上次执行的时间戳，如此循环</li>
+<li>实现方案 2：使用定时器，比如当 scroll 事件刚触发时，打印一个 hello world，然后设置个 1000ms 的定时器，此后每次触发 scroll 事件触发回调，如果已经存在定时器，则回调不执行方法，直到定时器触发，handler 被清除，然后重新设置定时器</li>
+</ul>
+</li>
+<li>函数防抖 debounce 指的是某个函数在某段时间内，无论触发了多少次回调，都只执行最后一次<ul>
+<li>防抖可以理解为司机等待最后一个人进入后再关门，每次新进一个人，司机就会把计时器清零并重新开始计时<ul>
+<li>「上车的乘客」就是我们频繁操作事件而不断涌入的回调任务</li>
+<li>「1 分钟」就是计时器，它是司机决定「关门」的依据，如果有新的「乘客」上车，将清零并重新计时</li>
+<li>「关门」就是最后需要执行的函数</li>
+</ul>
+</li>
+<li>应用：input 输入回调事件添加防抖函数后，只会在停止输入后触发一次</li>
+<li>实现方案：使用定时器，函数第一次执行时设定一个定时器，之后调用时发现已经设定过定时器就清空之前的定时器，并重新设定一个新的定时器，如果存在没有被清空的定时器，当定时器计时结束后触发函数执行</li>
+</ul>
+</li>
+</ul>
+
+    </section>
+    <section class="extra">
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IT%E6%8A%80%E6%9C%AF/" rel="tag">IT技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+      
+<nav class="nav">
+  
+    <a href="/es6/initEs6/"><i class="iconfont iconleft"></i>ES6的开发环境搭建</a>
+  
+  
+    <a href="/cate/throttle/">节流函数 throttle<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+      <section class="comments">
+        
+          <div class="btn" id="comments-btn">查看评论</div>
+        
+        
+      </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1258390473 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/yanZhangX " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:18782271516@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</footer>
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

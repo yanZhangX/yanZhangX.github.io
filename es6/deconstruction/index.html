@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>解构赋值 - 痴痴醉</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="google" content="notranslate" />
+  
+  <meta name="keywords" content="xiangty, 痴痴醉,"> 
+  
+  <meta name="description" content="解构是从对象中提取出更小元素的过程。赋值是对解构出来的..."> 
+  
+  <meta name="author" content="Tyler X"> 
+
+  
+    <link rel="icon" href="/images/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  
+  
+    <link rel="icon" href="/images/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  
+  
+    <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png" sizes="180x180">
+  
+  
+    <meta rel="mask-icon" href="/images/icons/stun-logo.svg" color="#333333">
+  
+  
+    <meta rel="msapplication-TileImage" content="/images/icons/favicon-144x144.png">
+    <meta rel="msapplication-TileColor" content="#000000">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1445822_58xq2j9v1id.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.18.1/styles/xcode.min.css">
+
+  
+
+  
+  
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css">
+
+  
+
+  <script>
+    var CONFIG = window.CONFIG || {}
+    CONFIG = {
+      fancybox: true,
+      pjax: false,
+      lazyload: {
+        enable: true,
+        loadingImage: '/images/theme/loading.gif',
+      },
+      donate_alipay: '',
+      donate_wechat: '',
+      motto: {
+        api: '',
+        default: '痴痴醉'
+      },
+      galleries: {
+        enable: 'true'
+      },
+      fab: {
+        enable: 'true',
+        alwaysShow: 'false'
+      }
+    }
+  </script>
+
+  
+
+  
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="lock-screen">
+  <div class="loading"></div>
+  <nav class="menu">
+  <div class="menu-close">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <ul class="menu-content">
+    
+    
+    
+    
+    <li class="menu-item"><a href="/ "> 首页</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/archives "> 归档</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/galleries "> 摄影</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/tags "> 标签</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/categories "> 分类</a></li>
+    
+    
+    
+    
+    <li class="menu-item"><a href="/about "> 关于</a></li>
+    
+  </ul>
+  <div class="menu-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</nav>
+
+  <main id="main">
+  <div class="container" id="container">
+    <article class="article">
+  <section class="head">
+  <img   class="lazyload" data-original="/images/theme/post-image.jpg" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="  draggable="false">
+  <div class="head-mask">
+    <h1 class="head-title">解构赋值</h1>
+    <div class="head-info">
+      <span class="post-info-item"><i class="iconfont iconcalendar"></i>2020-06-11</span>
+      
+      <span class="post-info-item"><i class="iconfont iconfont-size"></i>2387</span>
+    </div>
+  </div>
+</section>
+
+  <section class="main">
+    <section class="content">
+      <p><strong>解构是从对象中提取出更小元素的过程。赋值是对解构出来的元素进行重新赋值。</strong></p>
+<p><strong>下面的代码你可能无法在浏览器上实时测试，推荐在babel官网在线测试代码：[在线测试ES6代码网址][1]</strong></p>
+<h3 id="解构的分类"><a href="#解构的分类" class="headerlink" title="解构的分类"></a>解构的分类</h3><p>1、对象解构</p>
+<p>2、数组解构</p>
+<p>3、混合解构</p>
+<p>4、解构参数</p>
+<h3 id="对象解构"><a href="#对象解构" class="headerlink" title="对象解构"></a>对象解构</h3><p><strong>对象解构简单的例子</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对象解构</span></span><br><span class="line"><span class="keyword">const</span> &#123; a, b &#125; = obj</span><br><span class="line"><span class="built_in">console</span>.log(a, b) <span class="comment">//1  [1, 2]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在函数中使用解构赋值</strong></p>
+<p>解构是将对象或者数组的元素一个个提取出来，而赋值是给元素赋值，解构赋值的作用就是给对象或者数组的元素赋值。</p>
+<p>在调用test()函数的时候，我们给参数设置了默认值3，如果不重新赋值，则打印出3,3，但是进行解构赋值后，将props对象的参数解构赋值给a和b，所以打印结果是{a: 1, b: 2}</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> props = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;</span><br><span class="line">test(&#123;a=<span class="number">3</span>, b=<span class="number">3</span>&#125; = props) <span class="comment">// &#123;a: 1, b: 2&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面这个例子定义了a = 3,b = 3两个变量，现在我们想修改这2个变量的值，采用解构赋值的方式可以这样做：定义一个props对象，该对象包含2个属性a和b，然后进行解构赋值，这时就能更新变量a和b的value。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> props = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="number">2</span></span><br><span class="line">&#125;,</span><br><span class="line">a = <span class="number">3</span>,</span><br><span class="line">b = <span class="number">3</span>;</span><br><span class="line"><span class="comment">//解构赋值</span></span><br><span class="line">(&#123; a, b &#125; = props)</span><br><span class="line"><span class="built_in">console</span>.log(a, b) <span class="comment">// 1, 2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>嵌套对象解构</strong></p>
+<p>当对象层次较深时，你也可以解构出来。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  a: &#123;</span><br><span class="line">    b: &#123;</span><br><span class="line">      c: <span class="number">5</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> &#123;<span class="attr">a</span>: &#123;b&#125;&#125; = obj</span><br><span class="line"><span class="built_in">console</span>.log(b.c) <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数组解构"><a href="#数组解构" class="headerlink" title="数组解构"></a>数组解构</h3><p>数组解构比对象解构简单，因为数组只有数组字面量，不需要像对象一个使用key属性。</p>
+<p><strong>数组解构</strong><br>你可以选择性的解构元素，不需要解构的元素就使用逗号代替。</p>
+<figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//解构前2个元素</span></span><br><span class="line"><span class="keyword">const</span> [a, b] = arr</span><br><span class="line"><span class="built_in">console</span>.log(a,b) <span class="comment">//1 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//解构中间的元素</span></span><br><span class="line"><span class="keyword">const</span> [, b,] = arr</span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>解构赋值</strong><br>如果你没有看明白上面说到的对象解构赋值的含义，那么看完下面的数组解构赋值，或许你会有比较清晰的理解。</p>
+<p>这个例子中，正常情况下打印a的值是haha，但是将数组arr的第一个元素解构赋值给a，a的值就变成了1。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化一个变量a</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="string">"haha"</span>;</span><br><span class="line"><span class="comment">//定义一个数组</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="comment">//解构赋值a，将arr数组的第一个元素解构赋值给a，</span></span><br><span class="line">[a] = arr;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>使用解构赋值，还可以调换2个变量的值。</p>
+<figure class="highlight jsx"><figcaption><span>harmony</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">[a, b] = [b, a];</span><br><span class="line"><span class="built_in">console</span>.log(a, b); <span class="comment">// 2 1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>嵌套数组解构</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> [a, [,b]] = arr;</span><br><span class="line"><span class="built_in">console</span>.log(a, b) <span class="comment">// 1 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//实际解构过程，左边的变量和右边的数组元素一一对应下标。</span></span><br><span class="line"><span class="keyword">var</span> a = arr[<span class="number">0</span>],</span><br><span class="line">_arr$ = arr[<span class="number">1</span>],</span><br><span class="line">b = _arr$[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p><strong>不定元素解构</strong><br>三个点的解构赋值必须放在所有解构元素的最末尾，否则报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">let</span> [...a] = arr;</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">//[1,2,3,4] 这种做法就是克隆arr数组。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="混合解构"><a href="#混合解构" class="headerlink" title="混合解构"></a>混合解构</h3><p>混合解构指的是对象和数组混合起来，执行解构操作，没什么难度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  a: &#123;</span><br><span class="line">    id: <span class="number">1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  b: [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">  a: &#123;id&#125;,</span><br><span class="line">  b:[...arr]</span><br><span class="line">&#125; = obj;</span><br><span class="line"><span class="built_in">console</span>.log(id, arr) <span class="comment">//id = 1, arr = [2, 3]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="解构参数"><a href="#解构参数" class="headerlink" title="解构参数"></a>解构参数</h3><p>当给函数传递参数时，我们可以对每个参数进行解构，我给option的参数设置了默认值，这样可以防止没有给option传参导致的报错情况。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ajax</span>(<span class="params">url, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;timeout = <span class="number">0</span>, jsonp = <span class="literal">true</span>&#125; = options</span><br><span class="line">  <span class="built_in">console</span>.log(url, timeout, jsonp)</span><br><span class="line">&#125;;</span><br><span class="line">Ajax(<span class="string">'baidu.com'</span>, &#123;</span><br><span class="line">  timeout: <span class="number">1000</span>,</span><br><span class="line">  jsonp: <span class="literal">false</span></span><br><span class="line">&#125;) <span class="comment">// "baidu.com" 1000 false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本章讲解了对象解构赋值和数组解构赋值，以及对象和数组混合情况下的解构赋值操作，最后一个知识点是解构函数的参数。每一个都是重点，特别是最后一个，解构参数恐怕你经常在用了，只是通常你没发现。</p>
+
+    </section>
+    <section class="extra">
+      
+      
+  <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+
+      
+<nav class="nav">
+  
+    <a href="/es6/symbol/"><i class="iconfont iconleft"></i>Symbol和Symbol属性</a>
+  
+  
+    <a href="/es6/arrow/">箭头函数<i class="iconfont iconright"></i></a>
+  
+</nav>
+
+    </section>
+    
+      <section class="comments">
+        
+          <div class="btn" id="comments-btn">查看评论</div>
+        
+        
+      </section>
+    
+  </section>
+</article>
+  </div>
+</main>
+
+  <footer class="footer">
+  <div class="footer-social">
+    
+    
+    
+    
+    
+    <a href="tencent://message/?Menu=yes&uin=1258390473 " target="_blank" onMouseOver="this.style.color= '#12B7F5'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconQQ "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="javascript:; " target="_blank" onMouseOver="this.style.color= '#09BB07'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconwechat-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="https://github.com/yanZhangX " target="_blank" onMouseOver="this.style.color= '#24292E'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  icongithub-fill "></i>
+    </a>
+    
+    
+    
+    
+    
+    <a href="mailto:18782271516@163.com " target="_blank" onMouseOver="this.style.color='#FFBE5B'"
+      onMouseOut="this.style.color='#33333D'">
+      <i class="iconfont footer-social-item  iconmail"></i>
+    </a>
+    
+  </div>
+  <div class="footer-copyright"><p>Copyright© 2020-2021 | <a target="_blank" href="https://yanzhangx.github.io">xiangty</a> .AllRightsReserved</p></div>
+</footer>
+
+  
+      <div class="fab fab-plus">
+    <i class="iconfont iconplus"></i>
+  </div>
+  <div class="fab fab-up">
+    <i class="iconfont iconcaret-up"></i>
+  </div>
+  <div class="fab fab-menu">
+    <i class="iconfont iconmenu"></i>
+  </div>
+  
+</body>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+
+
+
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js"></script>
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
