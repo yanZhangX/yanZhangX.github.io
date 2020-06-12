@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://github.com/yanZhangX/yanZhangX.github.io.git/es6/initEs6/</loc>
+    
+    <lastmod>2020-06-12T08:11:33.075Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://github.com/yanZhangX/yanZhangX.github.io.git/cate/throttle/</loc>
     
     <lastmod>2020-06-12T08:03:15.622Z</lastmod>
@@ -40,13 +47,6 @@
     <loc>https://github.com/yanZhangX/yanZhangX.github.io.git/es6/arrow/</loc>
     
     <lastmod>2020-06-12T03:30:46.945Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://github.com/yanZhangX/yanZhangX.github.io.git/es6/initEs6/</loc>
-    
-    <lastmod>2020-06-12T02:46:21.400Z</lastmod>
     
   </url>
   
